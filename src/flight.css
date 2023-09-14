@@ -1,0 +1,90 @@
+/* flight.css */
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300&display=swap');
+
+/* Style for the container that holds the "From" and "To" input boxes */
+/* flight.css */
+
+.page{
+    text-align: left;
+    padding-bottom: 250px;
+    padding-right: 150px;
+    
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative; /* Add this */
+  }
+  
+  /* Style for each input box */
+  .input-box {
+    display: flex;
+    align-items: center; /* Center the label and input vertically */
+    
+  }
+  h3{
+    font-family: 'Unbounded', sans-serif;
+  }
+ 
+  
+  /* Style for the "From" input box */
+  .from {
+    border-radius: 10px; /* Rounded edges */
+    height: 50px;
+    width: 400px; /* Adjust the width to your desired size */
+    padding: 8px; /* Add some padding for spacing */
+    margin-right: 40px;
+  }
+  
+  /* Style for the "To" input box */
+  .to {
+    border-radius: 10px; /* Rounded edges */
+    height: 50px;
+    width: 400px; /* Adjust the width to your desired size */
+    padding: 8px; /* Add some padding for spacing */
+    margin-left: 40px;
+  }
+  
+  /* Style for the "Recommend Routes" button */
+  .search {
+    background-color: #5270529c; /* Blue color for the button */
+    color: #fff; /* Text color for the button */
+    padding: 10px 20px; /* Padding for the button */
+    border: none; /* Remove the default button border */
+    border-radius: 4px; /* Rounded edges for the button */
+    cursor: pointer; /* Add pointer cursor on hover */
+    margin-top: 10px; /* Adjust margin as needed */
+  }
+  .cale{
+      margin-right: -40px;
+      margin-left: 980px;
+  }
+
+  /* TripType.css */
+
+/* Style for the container that holds the trip type radio buttons */
+/* TripType.css */
+
+/* Style for the container that holds the trip type radio buttons */
+.trip-type-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px; /* Add spacing at the bottom */
+}
+
+/* Style for each radio button label */
+.trip-type-label {
+  display: flex;
+  align-items: center;
+  margin-left: 10px; /* Adjust spacing from the left */
+  margin-right: 10px; /* Adjust spacing between radio buttons */
+  cursor: pointer;
+}
+
+/* Style for the radio button input */
+.trip-type-input {
+  margin-right: 5px; /* Add spacing between the radio button and label text */
+}
+
+  
