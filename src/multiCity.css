@@ -1,0 +1,51 @@
+/* multiCity.css */
+
+.multi {
+    display: flex;
+    flex-direction: column; /* Align elements vertically */
+  }
+  
+  .city-container {
+    display: flex;
+    justify-content: space-between; /* Align elements with space between them */
+    align-items: center; /* Center elements vertically */
+    /* margin-bottom: 10px; Add margin between city containers */
+  }
+  
+  .input-box-from {
+    display: flex;
+    align-items: center; /* Center the label and input vertically */
+        
+  }
+  .input-box-to {
+    display: flex;
+    align-items: center; /* Center the label and input vertically */
+        
+  }
+
+  .froom {
+    border-radius: 10px; /* Rounded edges */
+    height: 50px;
+    width: 400px; /* Adjust the width to your desired size */
+    padding: 8px; /* Add some padding for spacing */
+    margin-right: 40px;
+  }
+
+  .too{
+    border-radius: 10px; /* Rounded edges */
+    height: 50px;
+    width: 400px; /* Adjust the width to your desired size */
+    padding: 8px; /* Add some padding for spacing */
+    margin-left: 40px;
+  }
+  
+  
+
+
+  
+  
+  button {
+    margin-top: 10px; 
+   
+  }
+  

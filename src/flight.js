@@ -5,6 +5,10 @@ import { faExchangeAlt, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DatePicker from 'react-datepicker';
 import './DatePickerCustomStyles.css'; // Import your custom CSS for styling the date picker
+import MultiCity from './multiCity';
+
+
+
 
 function RouteRecommendation() {
   const [departureAirport, setDepartureAirport] = useState('');
@@ -13,6 +17,8 @@ function RouteRecommendation() {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [tripType, setTripType] = useState('roundTrip'); // Default to 'Round Trip'
+ 
+
     //   const [recommendedRoutes, setRecommendedRoutes] = useState([]);
 
 //   const handleRecommendRoutes = () => {
@@ -64,11 +70,11 @@ function RouteRecommendation() {
     // Now, you can use the 'dayOfWeek' variable as needed in your logic
     // console.log(`Selected day of the week: ${dayOfWeek}`);
   };
-
+  
+  
   return (
     <div className="page">
       <h2>Flight Routes</h2>
-      {/* List of trip types with radio buttons */}
       <div className="trip-type-container">
         <label className="trip-type-label">
           <input
@@ -101,51 +107,47 @@ function RouteRecommendation() {
           Multi City
         </label>
       </div>
-      {/* Input fields for From, To, and Date */}
-      <div className="input-container">
-        <div className="input-box">
-          <label htmlFor="departureAirport"></label>
-          <input
-            className="from"
-            type="text"
-            id="departureAirport"
-            placeholder="Flying from"
-            value={departureAirport}
-            onChange={(e) => setDepartureAirport(e.target.value)}
-          />
-        </div>
-        <div className="input-box">
-          <p>
-            <FontAwesomeIcon
-              icon={faExchangeAlt}
-              onClick={() => {
-                const temp = departureAirport;
-                setDepartureAirport(destinationAirport);
-                setDestinationAirport(temp);
-              }}
+
+      {tripType !== 'multiCity' && ( // Render only if tripType is not 'multiCity'
+        <div className="input-container">
+          <div className="input-box">
+            <label htmlFor="departureAirport"></label>
+            <input
+              className="from"
+              type="text"
+              id="departureAirport"
+              placeholder="Flying from"
             />
-          </p>
-          <label htmlFor="destinationAirport"></label>
-          <input
-            className="to"
-            type="text"
-            id="destinationAirport"
-            placeholder="Destination"
-            value={destinationAirport}
-            onChange={(e) => setDestinationAirport(e.target.value)}
-          />
+          </div>
+          <div className="input-box">
+            <p>
+              <FontAwesomeIcon
+                icon={faExchangeAlt}
+              />
+            </p>
+            <label htmlFor="destinationAirport"></label>
+            <input
+              className="to"
+              type="text"
+              id="destinationAirport"
+              placeholder="Destination"
+            />
+          </div>
+          <div className="calendar-button-container">
+            <button className="calendar-button" onClick={toggleDatePicker}>
+              <FontAwesomeIcon icon={faCalendar} />
+            </button>
+            {showDatePicker && (
+              <div className="date-picker-container">
+                {<DatePicker selected={selectedDate} onChange={handleDateChange} inline />}
+              </div>
+            )}
+          </div>
         </div>
-        <div className="calendar-button-container">
-          <button className="calendar-button" onClick={toggleDatePicker}>
-            <FontAwesomeIcon icon={faCalendar} />
-          </button>
-          {showDatePicker && (
-            <div className="date-picker-container">
-              {<DatePicker selected={selectedDate} onChange={handleDateChange} inline />}
-            </div>
-          )}
-        </div>
-      </div>
+      )}
+
+      {tripType === 'multiCity' && <MultiCity />} {/* Render MultiCity component */}
+      
       <ul>
         {recommendedRoutes.map((route, index) => (
           <li key={index}>{route}</li>
@@ -156,6 +158,13 @@ function RouteRecommendation() {
 }
 
 export default RouteRecommendation;
+
+
+
+
+
+
+
 
 
 
