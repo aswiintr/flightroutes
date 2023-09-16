@@ -8,58 +8,66 @@ import axios from 'axios';
 function AirlinesList() {
   const [airlinesData, setAirlinesData] = useState([]);
   const [iataCodes, setIataCodes] = useState([]);
-  const [selectedIataCode, setSelectedIataCode] = useState('');
-  const [filteredAirlines, setFilteredAirlines] = useState([]);
+  const [selectedIataCodes, setSelectedIataCodes] = useState([]);
 
   useEffect(() => {
     // Fetch airlines data from your API endpoint when the component mounts
-    axios.get('https://api.example.com/airlines')
-      .then(response => {
+    axios
+      .get('https://api.example.com/airlines')
+      .then((response) => {
         const data = response.data;
         setAirlinesData(data.airlines);
 
         // Extract unique IATA codes from the data
-        const uniqueIataCodes = [...new Set(data.airlines.map(airline => airline.iataCode))];
+        const uniqueIataCodes = [...new Set(data.airlines.map((airline) => airline.iataCode))];
         setIataCodes(uniqueIataCodes);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching airlines data:', error);
       });
   }, []);
 
-  useEffect(() => {
-    // Apply filters when the selectedIataCode changes
-    if (selectedIataCode === '') {
-      setFilteredAirlines(airlinesData);
+  const handleCheckboxChange = (e) => {
+    const selectedCode = e.target.value;
+    if (selectedIataCodes.includes(selectedCode)) {
+      // If the code is already selected, remove it
+      setSelectedIataCodes((prevSelected) => prevSelected.filter((code) => code !== selectedCode));
     } else {
-      const filteredResult = airlinesData.filter(airline => airline.iataCode === selectedIataCode);
-      setFilteredAirlines(filteredResult);
+      // If the code is not selected, add it
+      setSelectedIataCodes((prevSelected) => [...prevSelected, selectedCode]);
     }
-  }, [selectedIataCode, airlinesData]);
+  };
 
   return (
     <div>
+      <div>
       <h1>Airlines List</h1>
-      <label>
-        Filter by IATA Code:
-        <select
-          value={selectedIataCode}
-          onChange={(e) => setSelectedIataCode(e.target.value)}
-        >
-          <option value="">All</option>
-          {iataCodes.map((iataCode, index) => (
-            <option key={index} value={iataCode}>
-              {iataCode}
-            </option>
-          ))}
-        </select>
-      </label>
-
       <ul>
-        {filteredAirlines.map((airline, index) => (
-          <li key={index}>{airline.iataCode} - {airline.name}</li>
+        {iataCodes.map((iataCode, index) => (
+          <li key={index}>
+            <label>
+              <input
+                type="checkbox"
+                value={iataCode}
+                checked={selectedIataCodes.includes(iataCode)}
+                onChange={handleCheckboxChange}
+              />
+              {iataCode}
+            </label>
+          </li>
         ))}
       </ul>
+
+      <ul>
+        {airlinesData
+          .filter((airline) => selectedIataCodes.length === 0 || selectedIataCodes.includes(airline.iataCode))
+          .map((airline, index) => (
+            <li key={index}>
+              {airline.iataCode} - {airline.name}
+            </li>
+          ))}
+      </ul>
+    </div>
     </div>
   );
 }
