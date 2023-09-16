@@ -12,6 +12,8 @@
 }
 
 .input-container {
+  
+  background-color: rgb(7, 8, 8);
     display: flex;
     justify-content: space-between;
     position: relative; /* Add this */
@@ -21,7 +23,11 @@
   .input-box {
     display: flex;
     align-items: center; /* Center the label and input vertically */
+    padding: auto;
     
+  }
+  .switch{
+    font: size 60px;
   }
   h3{
     font-family: 'Unbounded', sans-serif;
@@ -35,6 +41,7 @@
     width: 400px; /* Adjust the width to your desired size */
     padding: 8px; /* Add some padding for spacing */
     margin-right: 40px;
+   
   }
   
   /* Style for the "To" input box */
@@ -67,19 +74,27 @@
 /* TripType.css */
 
 /* Style for the container that holds the trip type radio buttons */
+/* Style for the dropdown container */
 .trip-type-container {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px; /* Add spacing at the bottom */
+  flex-direction: row; /* Ensure elements are in a row */
+  align-items: center; /* Center align the elements vertically */
 }
 
 /* Style for each radio button label */
 .trip-type-label {
+  font-family: 'Barlow', sans-serif;
+font-family: 'Unbounded', sans-serif;
+font-size: 13px;
   display: flex;
   align-items: center;
-  margin-left: 10px; /* Adjust spacing from the left */
-  margin-right: 10px; /* Adjust spacing between radio buttons */
+  margin-right: 50px; /* Add spacing between radio buttons */
   cursor: pointer;
+}
+.class{
+  text-emphasis-color: white;
+  font-family: 'Barlow', sans-serif;
+font-family: 'Unbounded', sans-serif;
 }
 
 /* Style for the radio button input */
@@ -87,4 +102,35 @@
   margin-right: 5px; /* Add spacing between the radio button and label text */
 }
 
-  
+/* Style for the dropdown select */
+select {
+  border: 1px solid rgb(17, 15, 15); /* Add a border to the select box */
+  border-radius: 10px; /* Rounded corners */
+  padding: 5px; /* Add padding */
+  height: 30px;
+  width:102px;
+}
+
+/* Style for dropdown select options */
+select option {
+  padding: 5px; /* Add padding to each option */
+}
+
+/* Style for the selected option */
+select option:checked {
+ 
+  color: #fff; /* Text color for the selected option */
+}
+
+/* Style for dropdown select when expanded */
+select:focus {
+  outline: none; /* Remove the outline when focused */
+  border-color:#5a5757; /* Border color when focused */
+  box-shadow: 0 0 5px rgba(85, 87, 88, 0.5); /* Add a shadow when focused */
+}
+select {
+  border: 1px solid rgb(27, 25, 25); /* Add a border to the select box */
+  border-radius: 10px; /* Rounded corners */
+  padding: 5px; /* Add padding */
+  background-color: #5a5757; /* Background color for the dropdown box */
+}

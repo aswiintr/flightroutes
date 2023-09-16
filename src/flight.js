@@ -5,6 +5,9 @@ import { faExchangeAlt, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DatePicker from 'react-datepicker';
 import './DatePickerCustomStyles.css'; // Import your custom CSS for styling the date picker
+import { Dropdown } from 'reactstrap';
+
+
 
 function RouteRecommendation() {
   const [departureAirport, setDepartureAirport] = useState('');
@@ -12,7 +15,8 @@ function RouteRecommendation() {
   const [recommendedRoutes] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [tripType, setTripType] = useState('roundTrip'); // Default to 'Round Trip'
+  const [dayOfWeek, setDayOfWeek] = useState(null); // Store the day of the week
+  const [tripType, setTripType] = useState('oneWay'); // Default to 'oneWay'
     //   const [recommendedRoutes, setRecommendedRoutes] = useState([]);
 
 //   const handleRecommendRoutes = () => {
@@ -49,8 +53,36 @@ function RouteRecommendation() {
 //       })
 //       .catch((error) => console.error(error));
 //   };
-  
+  //switch response
+  const handleSwitchAirport = () => {
+    const temp = departureAirport;
+    setDepartureAirport(destinationAirport);
+    setDestinationAirport(temp);
+  };
+//OmnmouseEnter
+const handleInputMouseEnter = () => {
+  // Create a payload object with the required data
+  const payload = {
+    departure: departureAirport,
+      destination: destinationAirport,
+      
+  };
 
+  // Make a POST request with the payload as JSON
+  fetch('https://api.example.com/search', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json', // Specify the content type as JSON
+    },
+    body: JSON.stringify(payload), // Convert the payload to JSON format
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the API response data here
+      console.log(data);
+    })
+    .catch((error) => console.error(error));
+};
   const toggleDatePicker = () => {
     setShowDatePicker(!showDatePicker);
   };
@@ -60,9 +92,10 @@ function RouteRecommendation() {
 
     // Extract the day of the week as an integer (0 for Sunday, 1 for Monday, etc.)
     const dayOfWeek = date.getDay();
-
+    setDayOfWeek(dayOfWeek);
     // Now, you can use the 'dayOfWeek' variable as needed in your logic
     // console.log(`Selected day of the week: ${dayOfWeek}`);
+    console.log(dayOfWeek)
   };
 
   return (
@@ -70,16 +103,7 @@ function RouteRecommendation() {
       <h2>Flight Routes</h2>
       {/* List of trip types with radio buttons */}
       <div className="trip-type-container">
-        <label className="trip-type-label">
-          <input
-            className="trip-type-input"
-            type="radio"
-            value="roundTrip"
-            checked={tripType === 'roundTrip'}
-            onChange={() => setTripType('roundTrip')}
-          />
-          Round Trip
-        </label>
+        
         <label className="trip-type-label">
           <input
             className="trip-type-input"
@@ -94,12 +118,27 @@ function RouteRecommendation() {
           <input
             className="trip-type-input"
             type="radio"
+            value="roundTrip"
+            checked={tripType === 'roundTrip'}
+            onChange={() => setTripType('roundTrip')}
+          />
+          Round Trip
+        </label>
+        <label className="trip-type-label">
+          <input
+            className="trip-type-input"
+            type="radio"
             value="multiCity"
             checked={tripType === 'multiCity'}
             onChange={() => setTripType('multiCity')}
           />
           Multi City
         </label>
+        <select className="class">
+    <option value="option1">Economy</option>
+    <option value="option2">Business class</option>
+    
+  </select>
       </div>
       {/* Input fields for From, To, and Date */}
       <div className="input-container">
@@ -111,11 +150,11 @@ function RouteRecommendation() {
             id="departureAirport"
             placeholder="Flying from"
             value={departureAirport}
-            onChange={(e) => setDepartureAirport(e.target.value)}
+            onChange={(e) => setDepartureAirport(e.target.value)}onMouseEnter={handleInputMouseEnter}
           />
         </div>
         <div className="input-box">
-          <p>
+          <p className="switch" onClick={handleSwitchAirport}>
             <FontAwesomeIcon
               icon={faExchangeAlt}
               onClick={() => {
@@ -132,7 +171,7 @@ function RouteRecommendation() {
             id="destinationAirport"
             placeholder="Destination"
             value={destinationAirport}
-            onChange={(e) => setDestinationAirport(e.target.value)}
+            onChange={(e) => setDestinationAirport(e.target.value)}onMouseEnter={handleInputMouseEnter}
           />
         </div>
         <div className="calendar-button-container">

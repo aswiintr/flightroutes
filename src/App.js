@@ -4,7 +4,7 @@ import './App.css';
 import Button from './button';
 import RouteRecommendation from './flight';
 import  Sidebar from './sidebar';
-import AirlinesList from './filter';
+
 function App() {
   return (
     <div className="App">
@@ -14,7 +14,7 @@ function App() {
         
         <Sidebar/>
       
-<AirlinesList/>
+
         <Button />
  
       </main>

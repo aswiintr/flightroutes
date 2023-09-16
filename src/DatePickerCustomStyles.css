@@ -14,13 +14,14 @@
   .calendar-button{
       color:white;
       /* height: 300px;
-      width: 80px; */font-size: 24px;
+      width: 80px; */font-size: 35px;
        
        
   }
   .calendar-button-container{
       margin-top: 40px;
       margin-bottom: 40px;
-      margin-left:20px;
+      margin-left:10px;
+      margin-right: 10px;
 
   }
