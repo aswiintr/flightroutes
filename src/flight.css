@@ -92,7 +92,7 @@ font-size: 13px;
   cursor: pointer;
 }
 .class{
-  text-emphasis-color: white;
+  
   font-family: 'Barlow', sans-serif;
 font-family: 'Unbounded', sans-serif;
 }
@@ -104,8 +104,8 @@ font-family: 'Unbounded', sans-serif;
 
 /* Style for the dropdown select */
 select {
-  border: 1px solid rgb(17, 15, 15); /* Add a border to the select box */
-  border-radius: 10px; /* Rounded corners */
+ 
+  
   padding: 5px; /* Add padding */
   height: 30px;
   width:102px;
@@ -125,12 +125,13 @@ select option:checked {
 /* Style for dropdown select when expanded */
 select:focus {
   outline: none; /* Remove the outline when focused */
-  border-color:#5a5757; /* Border color when focused */
-  box-shadow: 0 0 5px rgba(85, 87, 88, 0.5); /* Add a shadow when focused */
+  
+  
 }
 select {
-  border: 1px solid rgb(27, 25, 25); /* Add a border to the select box */
+  background-color: black;
+  color:white;
   border-radius: 10px; /* Rounded corners */
   padding: 5px; /* Add padding */
-  background-color: #5a5757; /* Background color for the dropdown box */
+  
 }

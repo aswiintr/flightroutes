@@ -14,8 +14,9 @@ function App() {
         
         <Sidebar/>
       
-
+<div className="btn">
         <Button />
+        </div>
  
       </main>
       </header>

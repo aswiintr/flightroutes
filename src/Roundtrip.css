@@ -1,0 +1,12 @@
+/* Add this CSS to your stylesheet or a separate CSS file */
+.date-picker-container {
+    padding-top: 70px;
+    display: flex;
+    
+  }
+  .placeholder{
+    width: 80px;
+  }
+
+  
+  
