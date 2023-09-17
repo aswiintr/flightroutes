@@ -4,11 +4,11 @@
 
 /* Container that centers the button */
 .container {
-    padding-bottom: 700px;
-    padding-left: 350px;
-    
    
-    
+   
+   margin-left: 350px;
+ 
+   padding-bottom: 1100px;
     
 }
 
@@ -37,10 +37,7 @@
     
     
 }
-.container{
-    
-    padding-bottom: 1100px;
-}
+
 
 /* Rest of your button styles... */
 

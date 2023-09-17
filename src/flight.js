@@ -5,18 +5,21 @@ import { faExchangeAlt, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DatePicker from 'react-datepicker';
 import './DatePickerCustomStyles.css'; // Import your custom CSS for styling the date picker
-import { Dropdown } from 'reactstrap';
-
+import Roundtrip from './roundtrip';
 
 
 function RouteRecommendation() {
+  
   const [departureAirport, setDepartureAirport] = useState('');
   const [destinationAirport, setDestinationAirport] = useState('');
   const [recommendedRoutes] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [dayOfWeek, setDayOfWeek] = useState(null); // Store the day of the week
+
   const [tripType, setTripType] = useState('oneWay'); // Default to 'oneWay'
+  const [showRoundtripComponent, setShowRoundtripComponent] = useState(false); // Add state for conditional rendering
+
     //   const [recommendedRoutes, setRecommendedRoutes] = useState([]);
 
 //   const handleRecommendRoutes = () => {
@@ -30,30 +33,7 @@ function RouteRecommendation() {
 //       .catch((error) => console.error(error));
 //   };
 
-// const handleRecommendRoutes = () => {
-//     // Create a payload object with the departureAirport and destinationAirport values
-//     const payload = {
-//       departure: departureAirport,
-//       destination: destinationAirport,
-//       day:dayOfWeek
-//     };
-  
-//     // Make a POST request with the payload as the request body
-//     fetch('https://api.example.com/routes', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json', // Specify the content type as JSON
-//       },
-//       body: JSON.stringify(payload), // Convert the payload to JSON format
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         // Handle the response data
-//         setRecommendedRoutes(data.routes);
-//       })
-//       .catch((error) => console.error(error));
-//   };
-  //switch response
+ //switch response
   const handleSwitchAirport = () => {
     const temp = departureAirport;
     setDepartureAirport(destinationAirport);
@@ -67,7 +47,6 @@ const handleInputMouseEnter = () => {
       destination: destinationAirport,
       
   };
-
   // Make a POST request with the payload as JSON
   fetch('https://api.example.com/search', {
     method: 'POST',
@@ -98,6 +77,7 @@ const handleInputMouseEnter = () => {
     console.log(dayOfWeek)
   };
 
+
   return (
     <div className="page">
       <h2>Flight Routes</h2>
@@ -110,7 +90,9 @@ const handleInputMouseEnter = () => {
             type="radio"
             value="oneWay"
             checked={tripType === 'oneWay'}
-            onChange={() => setTripType('oneWay')}
+            onChange={() => {
+              setTripType('oneWay');
+              setShowRoundtripComponent(false); }}// Hide the Roundtrip component
           />
           One Way
         </label>
@@ -120,7 +102,9 @@ const handleInputMouseEnter = () => {
             type="radio"
             value="roundTrip"
             checked={tripType === 'roundTrip'}
-            onChange={() => setTripType('roundTrip')}
+            onChange={() => {setTripType('roundTrip')
+          setShowRoundtripComponent(true);}}
+          
           />
           Round Trip
         </label>
@@ -130,18 +114,19 @@ const handleInputMouseEnter = () => {
             type="radio"
             value="multiCity"
             checked={tripType === 'multiCity'}
-            onChange={() => setTripType('multiCity')}
+            onChange={() => {setTripType('multiCity')
+          setShowRoundtripComponent(false)}}
           />
           Multi City
         </label>
         <select className="class">
     <option value="option1">Economy</option>
-    <option value="option2">Business class</option>
+    <option value="option2">Business </option>
     
   </select>
       </div>
       {/* Input fields for From, To, and Date */}
-      <div className="input-container">
+      <div className="input-container" >
         <div className="input-box">
           <label htmlFor="departureAirport"></label>
           <input
@@ -185,6 +170,8 @@ const handleInputMouseEnter = () => {
           )}
         </div>
       </div>
+      {/* Conditional rendering for Roundtrip component */}
+      {showRoundtripComponent && <Roundtrip />}
       <ul>
         {recommendedRoutes.map((route, index) => (
           <li key={index}>{route}</li>
@@ -193,7 +180,6 @@ const handleInputMouseEnter = () => {
     </div>
   );
 }
-
 export default RouteRecommendation;
 
 
